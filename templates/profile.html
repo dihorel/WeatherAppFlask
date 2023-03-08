@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+    Profile
+</title>
+{% endblock %}
+
+
+{% block content %}
+<script>
+    function enableEdit() {
+        if(document.getElementById("edit").checked==false)
+        {
+            document.getElementById("name").setAttribute('disabled','disabled');
+            document.getElementById("firstname").setAttribute('disabled','disabled');
+            document.getElementById("birthdate").setAttribute('disabled','disabled');
+            document.getElementById("country").setAttribute('disabled','disabled');
+            document.getElementById("city").setAttribute('disabled','disabled');
+            document.getElementById("address").setAttribute('disabled','disabled');
+            document.getElementById("update").setAttribute('disabled','disabled');
+            document.getElementById("coordinates").setAttribute('disabled','disabled'); 
+        }
+        else
+        {
+            document.getElementById("name").removeAttribute('disabled');
+            document.getElementById("firstname").removeAttribute('disabled');
+            document.getElementById("birthdate").removeAttribute('disabled');
+            document.getElementById("country").removeAttribute('disabled');
+            document.getElementById("city").removeAttribute('disabled');
+            document.getElementById("address").removeAttribute('disabled');
+            document.getElementById("update").removeAttribute('disabled');
+            document.getElementById("coordinates").removeAttribute('disabled');
+
+        }
+      }
+</script>
+
+<form method="POST" action="/profile" >
+    <div class="column is-6 is-offset-3">
+
+        <!---------------------------------Flash message------------------------------------->
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger" style="margin: 20px;">
+        {{messages[0]}}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div style="height:30px"></div>
+
+         <!----------------------------------Active------------------------------------------->
+         <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Active:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="name" id="active" 
+                    autofocus="" value="{{active}}" style="font-weight: bold;" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------------------Api user------------------------------------------->
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Api user:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="name" id="active" 
+                    autofocus="" value="{{api_user}}" style="font-weight: bold; background-color: greenyellow;" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------------------Api key------------------------------------------->
+        <div class="lista">
+        <div class="title is-5" style="color:blue">
+            Api key:
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input is-small" type="text" name="name" id="active" 
+                autofocus="" value="{{api_key}}" style="font-weight: bold; background-color: greenyellow;" disabled>
+            </div>
+        </div>
+    </div>
+
+
+         <!----------------------------------Name------------------------------------------->
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Name:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="name" id="name" 
+                    autofocus="" value="{{name}}" style="font-weight: bold;" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!-----------------------------------Firstname------------------------------------------>
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Firstname:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="firstname" id="firstname" 
+                    autofocus="" style="font-weight: bold;" value="{{firstname}}" disabled>
+                </div>
+            </div>
+        </div>
+
+
+        <!--------------------------------------Birthdate-------------------------------------------->
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Birthdate:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="date" name="birthdate" id="birthdate" 
+                    autofocus="" style="font-weight: bold;" value="{{birthdate}}" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------------------Country------------------------------------------->
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Country:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <select name="country" id="country" class="input is-small"  style="font-weight: bold;" disabled>
+                        {% for i in range(0, length) %}            
+                            {% if country_list[i]==country %}
+                            <option value="{{country_list[i]}}" selected>{{country_list[i]}}</option>
+                            {% else %}
+                            <option value="{{country_list[i]}}">{{country_list[i]}}</option>
+                            {%endif%}
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-----------------------------------City-------------------------------------------->
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                City:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="city"  id="city"
+                     autofocus="" style="font-weight: bold;" value="{{city}}" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------------------Address------------------------------------------>
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Address:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="address" id="address"
+                     autofocus="" style="font-weight: bold;" value="{{address}}" disabled >
+                </div>
+            </div>
+        </div>
+        <div style="height:40px" ></div>
+
+            <!-----------------------------Button Get coordinates ------------------------------------>
+            <div class="div-button" >
+                <button class="button is-large" style="Width:100%" id="coordinates" type="button" onclick="calculate_gps()" disabled>Coordinates</button>
+            </div>
+            <div style="height:40px" ></div>
+
+
+        <!----------------------------------Latitude------------------------------------------>
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Latitude:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="latitude" id="latitude"
+                        autofocus="" style="font-weight: bold; background-color: greenyellow;" value="{{latitude}}" disabled >
+                </div>
+            </div>
+        </div>
+
+
+        <!----------------------------------Longitude------------------------------------------>
+        <div class="lista">
+            <div class="title is-5" style="color:blue">
+                Longitude:
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="longitude" id="longitude"
+                        autofocus="" style="font-weight: bold; background-color: greenyellow;" value="{{longitude}}" disabled >
+                </div>
+            </div>
+        </div>
+        <div style="height:40px" ></div>
+
+        <!------------------------------Checkbox enable-------------------------------------->
+        <div class="field">
+            <label class="checkbox">
+                <input type="checkbox" name="edit"  id="edit"  onclick="javascript:enableEdit();">
+                Edit profile
+            </label>
+        </div>
+
+        <!-----------------------------Button Update data------------------------------------>
+        <div class="div-button" >
+                <button class="button is-info is-large" style="Width:100%" id="update" type="submit" name="action" value="update" disabled>Update</button>
+        </div>
+        
+        <p></p>
+        
+        <!-----------------------------Button renew api key ---------------------------------->
+        <div class="div-button" >
+            <button class="button is-success is-large " style="Width:100%" id="renew_api_key" type="submit" name="action" value="renew_api_key">Renew api key</button>
+        </div>
+        
+        <div>
+            <p></p>
+        </div>
+        
+    </div>
+</form>
+
+{% endblock %}
+
+
+
+<!--Calculate GPS location without refreshing the page-->
+{% block script %}
+<script>
+    function calculate_gps(){
+        var country=document.getElementById('country');
+        var city=document.getElementById('city');
+        var address=document.getElementById('address')
+        var latitude=document.getElementById('latitude')
+        var longitude=document.getElementById('longitude')
+
+        var entry={country: country.value, 
+                    city:city.value,
+                    address:address.value};  
+        
+        fetch(`${window.origin}/gps`,{
+            method:'POST',
+            credentials:'include',
+            body:JSON.stringify(entry),
+            cache:"no-cache",
+            headers:new Headers({
+                'content-type':'application/json'
+                })
+            })
+        .then(function(response){
+            if(response.status!=200){
+                console.log(`Response status was:${response.status}`)
+                return;
+            }
+            response.json().then(function(data){
+                            lat=data[0]['latitude'];
+                            long=data[0]['longitude'];
+                            latitude.value=lat;
+                            longitude.value=long;
+                            console.log(lat,long);
+                            return;
+                            })
+        })
+    }
+    </script>
+{% endblock %}

@@ -1,0 +1,30 @@
+body{
+    background-color: #48c78e;
+}
+
+.lista{
+    display:grid;
+    grid-template-columns:  1fr 3fr; 
+    margin:0px;
+}
+
+.admin-list{
+    display:grid;
+    grid-template-columns: 200px 70px 100px 100px 100px 100px 100px 1fr 100px 150px 50px; 
+    margin:5px;
+    vertical-align: middle;
+}
+
+
+.title{
+    flex:5;
+}
+
+.field{
+    flex:5;
+}
+
+.div-button{
+    display: flex;
+    justify-content: center;
+}

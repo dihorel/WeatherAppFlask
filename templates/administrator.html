@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+    Administrator
+</title>
+{% endblock %}
+
+
+
+{% block content %}
+<form method="POST" action="/administrator">
+    <div class="column is-full">
+
+        <!---------------------------------Flash message------------------------------------->
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger" style="margin: 20px;">
+        {{messages[0]}}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <!--Welcome screen-->
+        <div class="div-button" >
+            <h1 class="title is-4" style="color:brown;">Userlist</h1>
+        </div>
+        <div style="height:30px"></div>
+
+
+         <!----------------------------------Tablehead------------------------------------------->
+         <div class="admin-list">
+            <!--email-->
+            <div class="control">
+                <div>
+                    <input class="input is-small" type="text" name="email-head" id="active" 
+                    autofocus="" value="EMAIL" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+            <!--status-->
+            <div class="control">
+                <div>
+                    <input class="input is-small" type="text"  name="status-head" id="active" 
+                    autofocus="" value="STATUS" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+            <!--name-->
+
+                <div class="control">
+                    <input class="input is-small" type="text" name="name-head" id="active" 
+                    autofocus="" value="NAME" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+
+            <!--firstname-->
+
+                <div class="control">
+                    <input class="input is-small" type="text" name="firstname-head" id="active" 
+                    autofocus="" value="FIRSTNAME" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+
+            <!--birthdate-->
+
+                <div class="control">
+                    <input class="input is-small" type="text" name="birthday-head" id="active" 
+                    autofocus="" value="BIRTHDATE" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+
+            <!--country-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="country-head" id="active" 
+                    autofocus="" value="COUNTRY" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+            <!--city-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="city-head" id="active" 
+                    autofocus="" value="CITY" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+            <!--address-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="address-head" id="active" 
+                    autofocus="" value="ADDRESS" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+            <!--activation-code-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="activation-code-head" id="active" 
+                    autofocus="" value="CODE" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+
+            <!--api key-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="activation-code-head" id="active" 
+                    autofocus="" value="API KEY" style="margin-left: 10px; margin-right: 10px; border-color: white; background-color:chartreuse;" disabled>
+                </div>
+            </div>
+        </div>
+
+        {% for i in range(1,length) %}
+         <!----------------------------------User------------------------------------------->
+         <div class="admin-list">
+            <!--email-->
+            <div class="control">
+                <div>
+                    <input class="input is-small" type="text" name="email" id="active" 
+                    autofocus="" value="{{user_list[i]['email']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+            <!--status-->
+            <div class="control">
+                <div>
+                    <input class="input is-small" type="text"  name="status" id="active" 
+                    autofocus="" value="{{user_list[i]['status']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+            <!--name-->
+
+                <div class="control">
+                    <input class="input is-small" type="text" name="name" id="active" 
+                    autofocus="" value="{{user_list[i]['name']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+
+            <!--firstname-->
+
+                <div class="control">
+                    <input class="input is-small" type="text" name="firstname" id="active" 
+                    autofocus="" value="{{user_list[i]['firstname']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+
+            <!--birthdate-->
+
+                <div class="control">
+                    <input class="input is-small" type="text" name="birthdate" id="active" 
+                    autofocus="" value="{{user_list[i]['birthdate']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+
+            <!--country-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="country" id="active" 
+                    autofocus="" value="{{user_list[i]['country']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+            <!--city-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="city" id="active" 
+                    autofocus="" value="{{user_list[i]['city']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+            <!--address-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="address" id="active" 
+                    autofocus="" value="{{user_list[i]['address']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+            <!--activation-code-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="activation-code" id="active" 
+                    autofocus="" value="{{user_list[i]['activation_code']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+
+            <!--api key-->
+            <div class="field">
+                <div class="control">
+                    <input class="input is-small" type="text" name="activation-code" id="active" 
+                    autofocus="" value="{{user_list[i]['api_key']}}" style="margin-left: 10px; margin-right: 10px; border-color: chartreuse;" disabled>
+                </div>
+            </div>
+
+        <!--delete-->
+        <div class="field">
+            <div class="control">
+                <button type="submit" name="action" value="{{user_list[i]['email']}}" class="button is block is-small" 
+                style="background-color:indianred; color:white">
+                    Delete
+                </button>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" name="action" class="button is block is-small" value="download"
+        style="background-color:indianred; color:white">
+            Export CSV
+        </button>
+        <p style="margin-top: 50px; margin-bottom: 50px;"></p>
+
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input  type="checkbox" {{email_disabled}} name="action" id="disable-email" onChange='change_switch()' >
+            <span class="slider round"></span>
+            <label for="disable-email">Disable email</label>
+        </label>
+    </div>
+</form>
+ {% endblock %} 
+ 
+ 
+
+
+
+
+<!--Enable/Disable switch-->
+{% block script %}
+<script>
+    function change_switch(){
+        var disable_email=document.getElementById('disable-email');
+
+
+        var entry={email_status: disable_email.checked};  
+        
+        fetch(`${window.origin}/admin_disable_email`,{
+            method:'POST',
+            credentials:'include',
+            body:JSON.stringify(entry),
+            cache:"no-cache",
+            headers:new Headers({
+                'content-type':'application/json'
+                })
+            })
+
+    }
+
+</script>
+
+{% endblock %}

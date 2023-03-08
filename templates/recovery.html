@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+    Password recovery
+</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Password recovery</h3>
+    <div class="box">
+
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{messages[0]}}
+                Fill in the correct data!</a>
+            </div>
+
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/recovery">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                </div>
+            </div>
+
+
+            <div style=" display: grid; grid-template-columns: 1fr 120px;">
+                <div class="field">
+                    <div class="control" style="margin-right: 10px;">
+                        <input class="input is-large" type="text" name="code" placeholder="Validation code" autofocus="" >
+                    </div>
+                </div>
+                <button class="button is-block is-dark is-medium" style="height: 60px;" type="submit" name="action" value="send_code">
+                    Send
+                </button>
+            </div>
+
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Password" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="confirm_password" placeholder="Confirm password">
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth" type="submit" name="action" value="recover_password">
+                Confirm new password
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

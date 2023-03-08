@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>
+    Signup a new account
+</title>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="column is-4 is-offset-4">
+    <h3 class="title">SignUp a new account</h3>
+    <div class="box">
+
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{messages[0]}}
+                Fill in the correct data!</a>
+            </div>
+
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/signup">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="" id="input-email">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Password" autofocus="" id="input-password">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="confirm_password" placeholder="Confirm password" id="input-confirmpassword">
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth" id="button-create">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

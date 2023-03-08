@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>
+    Weather
+</title>
+{% endblock %}
+
+
+{% block content %}
+
+    {% if current_user.is_authenticated %}
+    <p>{{weather}}</p>
+    <iframe srcdoc="{{map}}" width="90%" height="600"></iframe>
+    {% else %}
+    <p>Please login or signup in order to display your location</p>
+    {% endif %}
+
+{% endblock %}

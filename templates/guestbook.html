@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>
+    Main page
+</title>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <h1>Guestbook</h1>
+    <div>
+        <label>
+            Name
+        </label>
+    </div>
+    <div>
+        <input type="text" id="name" placeholder="name"> </input>
+    </div>
+
+    <div>
+        <label>
+            Message
+        </label>
+    </div>
+    <div>
+        <input type="text" id="message" placeholder="message"> </input>
+    </div>
+
+    <button onclick="submit_entry()">
+        Submit
+    </button>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    function submit_entry(){
+        var name=document.getElementById('name');
+        var message=document.getElementById('message');
+
+        var entry={name: name.value, 
+            message:message.value};  
+        
+        fetch(`${window.origin}/add_entry`,{
+            method:'POST',
+            credentials:'include',
+            body:JSON.stringify(entry),
+            cache:"no-cache",
+            headers:new Headers({
+                'content-type':'application/json'
+                })
+            })
+        .then(function(response){
+            if(response.status!=200){
+                console.log(`Response status was:${response.status}`)
+                return;
+            }
+            response.json().then(function(data){
+                            console.log(data)
+                            })
+
+        })
+
+    }
+</script>
+
+
+{% endblock %}

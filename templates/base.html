@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static',filename='styles/base.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='styles/bulma.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='styles/switch.css')}}">
+        {% block head %}
+
+        {% endblock %}
+        {% block script %}
+
+        {% endblock %}
+    </head>
+    <body>
+        <section class="hero is-primary is-fullheight">
+            <div class="hero-head">
+                <nav class="navbar">
+                    <div class="container">
+                        <div id="navbarMenuHeroA" class="navbar-menu">
+                            <div class="navbar-start">
+
+                                {% if current_user.is_authenticated and current_user.id==1 %}
+                                <a href="{{ url_for('auth.administrator') }}"  style="color:springgreen" class="navbar-item" id="link-administrator">
+                                    Administrator
+                                </a>
+                                {% endif %}
+
+                                <a href="{{ url_for('main.index') }}" class="navbar-item" id="link-home">
+                                    Home
+                                </a>
+
+                                {% if current_user.is_authenticated and not current_user.id==1 %}
+                                    {% if request.path != "/profile" %}
+                                        <a href="{{ url_for('auth.profile') }}" class="navbar-item" id="link-profile">
+                                            Profile
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if not current_user.is_authenticated %}
+                                <a href="{{ url_for('main.login') }}" class="navbar-item" id="link-login">
+                                    Login
+                                </a>
+                                {% endif %}
+
+                                {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('auth.change_password') }}" class="navbar-item" id="link-changepassword">
+                                    Change password
+                                </a>
+                                {% endif %}
+
+                                {% if current_user.is_authenticated  and not current_user.active %}
+                                <a href="{{ url_for('auth.activation') }}" class="navbar-item" id="link-activate">
+                                    Activate
+                                </a>
+                                {% endif %}
+
+                                {% if not current_user.is_authenticated %}
+                                <a href="{{ url_for('auth.signup') }}" class="navbar-item" id="link-signup">
+                                    Sign Up
+                                </a>
+                                {% endif %}
+
+                                {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('auth.logout') }}" class="navbar-item" id="link-logout">
+                                    Logout
+                                </a>
+                                {% endif %}
+
+                                 <!--display current WEATHER in the navbar-->
+                                {% if current_user.is_authenticated and not current_user.id==1 and
+                                    current_user.latitude!=None and current_user.longitude!=None %}
+                                    {% if request.path != "/weather" %}
+                                        <a href="{{ url_for('auth.weather') }}" class="navbar-item" id="link-weather">
+                                            Weather
+                                        </a>
+                                    {%endif%}
+                                {% endif %}
+
+                                <!--display current USERNAME in the navbar-->
+                                {% if current_user.is_authenticated %}
+                                    <a class="navbar-item" style="color:yellow" >{{current_user.email}}</a>
+                                {% endif %}
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                   {% block content %}
+
+                   {% endblock %}
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

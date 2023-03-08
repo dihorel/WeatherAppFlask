@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>
+    Main page
+</title>
+{% endblock %}
+
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+    <p>You are logged in as {{current_user.name}} {{current_user.firstname}}</p>
+    {% else %}
+    <h1>Please login or signup in order to display your location</h1>
+    {% endif %}
+
+{% endblock %}

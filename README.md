@@ -9,7 +9,7 @@ After accessing the main webpage, a new user must press the SignUp button in ord
 ![SignupPage](utils/signup.JPG)
 
 #### _Activation_
-An activation code is sent on the user email address, with a 24hour valability and a 10 time retry rate.If any of this rules are broken, the Activation code will be resent.
+An activation code is sent on the user email address, with a 24 hours valability and a 10 times retry rate.If any of this rules are broken, the Activation code will be resent.
 #### _Profile_
 After login, the new user must fill in the form, with Name, Lastname, DateOfBirth, Country, City, Address. Based on the filled-in address, the GPS Coordinates of the user address, will be generated, using the geopy.geodecode ArcGis library.All the filled in data is stored in the credentials table part of the MYSQL database.
 #### _Weather_

@@ -2,7 +2,7 @@
 
 The application was build in Python3.10 using the Flask, Flask-Login and Flask-SqlAlchemy libraries, in order to combine the user authentification process with the MYSQL Database.The whole project is stored online, on www.pythonanywhere.com, using a WSGI server.Backbone and html graphics are inspired from the [tutorial] posted on the DigitalOcean website which was modified to fullfil my requirements.
 
-<img src="screenshot.png" alt="Alt text" title="Optional title">
+![Website](utils/screenshot.JPG)
 
 # Functionality
 After accessing the main html webpage, a new user must press the SignUp button in order to create a new user account.The SignUp window requires a valid and unique email address and a solid, more then 8 characters, password that is to include lowerand capital letters, numbers and special characters. 
